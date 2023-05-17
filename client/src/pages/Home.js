@@ -1,9 +1,13 @@
 import React, { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { RecipesContext } from "../context/recipesContext"
+import "../css/styles.css"
+import Button from "react-bootstrap/Button"
 
 function Home() {
   const {filterRecipes, search, setSearch} = useContext(RecipesContext)
+
+  const navigate = useNavigate()
 
   return (
     <section className={`-bg-primary container`}>
@@ -20,16 +24,17 @@ function Home() {
               onChange={(e) => setSearch(e.target.value)}
             ></input>
             <br/>
-            <button 
-              className={`search-button`}
+            <Button 
+              variant="primary"
               type="submit" 
               value="Search" 
               onClick={(e) => {
                 e.preventDefault()
                 filterRecipes()
+                navigate("/search")
               }}
-            ><Link to="/search">Search</Link>
-            </button>
+            >Search
+            </Button>{' '}
             <hr/>
             <Link 
               to="/recipes" 

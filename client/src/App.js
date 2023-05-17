@@ -8,6 +8,7 @@ import About from "./pages/About"
 import FilteredRecipes from "./pages/FilteredRecipes"
 import RecipesList from "./pages/RecipesList"
 import SingleRecipe from "./pages/SingleRecipe"
+import "./css/styles.css"
 
 export default function App() {
   return (
