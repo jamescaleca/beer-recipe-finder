@@ -26,16 +26,16 @@ export default function App() {
             />
             <Route 
               path="/recipes"
-              element={<RecipesList />}
+              element={<FilteredRecipes />}
             />
             <Route 
               path="/recipes/:recipeId" 
               element={<SingleRecipe />}
             />
-            <Route 
+            {/* <Route 
               path="/search" 
               element={<FilteredRecipes />}
-            />
+            /> */}
             <Route 
               path="*"
               element={<NotFound />}
