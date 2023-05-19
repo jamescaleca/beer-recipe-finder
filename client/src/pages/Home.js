@@ -38,7 +38,7 @@ function Home() {
       <h2 className={`theme-text text-center`}>Welcome</h2>
       <h3>Search for recipe by category:</h3>
       <ButtonGroup>{mapCategories}</ButtonGroup>
-      <h3 className={`theme-text text-center`}>Search for a beer recipe by food pairing:</h3>
+      <h3 className={`theme-text text-center`}>Search for a recipe:</h3>
       <form className={`form-search-bar text-center`}>
         <input 
           className={`search-input`}
