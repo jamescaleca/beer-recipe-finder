@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import BeerIcon from "../assets/beer-icon.png"
+import FoodIcon from "../assets/food.svg"
 import Container from "react-bootstrap/Container"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -12,8 +13,8 @@ function NavbarComponent() {
       <Container>
         <Navbar.Brand href="/">
           <img 
-            alt="BeerIcon" 
-            src={BeerIcon} 
+            alt="FoodIcon" 
+            src={FoodIcon} 
             style={{"width": "2rem"}}
           ></img>
         </Navbar.Brand>

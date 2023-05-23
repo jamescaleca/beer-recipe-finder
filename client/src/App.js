@@ -32,10 +32,10 @@ export default function App() {
               path="/recipes/:recipeId" 
               element={<SingleRecipe />}
             />
-            {/* <Route 
+            <Route 
               path="/search" 
               element={<FilteredRecipes />}
-            /> */}
+            />
             <Route 
               path="*"
               element={<NotFound />}

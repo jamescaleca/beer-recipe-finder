@@ -10,7 +10,10 @@ export default function FilteredRecipes() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const categoryFilter = searchParams.get("category")
-  console.log(categoryFilter)
+  const queryFilter = searchParams.get("q")
+  console.log(queryFilter)
+
+  console.log(searchParams)
 
   const getMealsByCategory = (cat) => {
     axios
@@ -22,15 +25,30 @@ export default function FilteredRecipes() {
       .catch(err => console.log(err))
   }
 
+  const getMealsBySearchQuery = (search) => {
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
+      .then(res => {
+        const results = res.data.meals.map(meal => meal)
+        setRecipes(results)
+      })
+      .catch(err => console.log(err))
+  }
+
   useEffect(() => {
-    getMealsByCategory(categoryFilter)
-  }, [categoryFilter])
+    if(categoryFilter) {
+      getMealsByCategory(categoryFilter)
+    }
+    if(queryFilter) {
+      getMealsBySearchQuery(queryFilter)
+    }
+  }, [categoryFilter, queryFilter])
 
   const searchResults = recipes.length > 0 ?
     recipes.map(recipe => (
       <Link 
         key={recipe.idMeal} 
-        style={{ "text-decoration": "none" }} 
+        style={{ "textDecoration": "none" }} 
         to={`/recipes/${recipe.idMeal}`}
       >
         <Card style={{ "width": "18rem" }}>

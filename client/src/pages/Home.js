@@ -55,7 +55,7 @@ function Home() {
           onClick={(e) => {
             e.preventDefault()
             // filterRecipes()
-            navigate("/search")
+            navigate(`/search?q=${search}`)
           }}
         >Search
         </Button>{' '}
