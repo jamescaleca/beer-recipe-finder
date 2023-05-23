@@ -13,7 +13,7 @@ export default function SingleRecipe() {
   useEffect(() => {
     const getThisRecipe = () => {
       axios 
-        .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`)
+        .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/lookup.php?i=${recipeId}`)
         .then(res => {
           setThisRecipe(res.data.meals[0])
         })

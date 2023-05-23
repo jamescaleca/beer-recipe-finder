@@ -17,7 +17,7 @@ export default function FilteredRecipes() {
 
   const getMealsByCategory = (cat) => {
     axios
-      .get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
+      .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/filter.php?c=${cat}`)
       .then(res => {
         const results = res.data.meals.map(meal => meal)
         setRecipes(results)
@@ -27,7 +27,7 @@ export default function FilteredRecipes() {
 
   const getMealsBySearchQuery = (search) => {
     axios
-      .get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
+      .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/search.php?s=${search}`)
       .then(res => {
         const results = res.data.meals.map(meal => meal)
         setRecipes(results)

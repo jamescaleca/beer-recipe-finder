@@ -13,7 +13,7 @@ function Home() {
   
   const getCategories = () => {
     axios
-      .get(`https://www.themealdb.com/api/json/v1/1/list.php?c=list`)
+      .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/list.php?c=list`)
       .then(res => {
         const strCategories = res.data.meals.map(cat => cat.strCategory)
         setCategories(strCategories)
