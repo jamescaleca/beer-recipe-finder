@@ -1,1 +1,4 @@
-/* No CSS *//*# sourceMappingURL=styles.css.map */
+#heart {
+  width: 1rem;
+  filter: invert(12%) sepia(80%) saturate(7045%) hue-rotate(9deg) brightness(91%) contrast(114%);
+}/*# sourceMappingURL=styles.css.map */

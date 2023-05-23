@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import axios from "axios"
@@ -8,7 +8,9 @@ export default function SingleRecipe() {
   const {recipeId} = useParams()
   const [thisRecipe, setThisRecipe] = useState([])
 
-  console.log(recipeId)
+  const location = useLocation()
+
+  console.log(location)
 
   useEffect(() => {
     const getThisRecipe = () => {
@@ -20,7 +22,9 @@ export default function SingleRecipe() {
         .catch(error => console.log(error))
     }
     getThisRecipe()
-  }, [])
+  }, [recipeId])
+
+  const search = location.state?.search || ""
 
   return (
     thisRecipe ? 
@@ -35,10 +39,14 @@ export default function SingleRecipe() {
 
         <h4>Ingredients:</h4>
 
-        <a href={thisRecipe.strSource}>Source</a>
-        <Button variant="secondary" size="sm">
-            Back to results
-        </Button>{' '}
+        <a href={thisRecipe.strSource} target="_blank" rel="noopener noreferrer">Source</a>
+        <Link
+          to={`..?${search}`}
+          relative="path"
+          className="back-button"
+        >
+          Back to results
+        </Link>
       </div>
     : null
   )

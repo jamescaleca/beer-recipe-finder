@@ -15,25 +15,22 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
             <Route 
-              path="/"
-              element={<Home />}
-            />
-            <Route 
-              path="/about"
+              path="about"
               element={<About />}
             />
             <Route 
-              path="/recipes"
+              path="recipes"
               element={<FilteredRecipes />}
             />
             <Route 
-              path="/recipes/:recipeId" 
+              path="recipes/:recipeId" 
               element={<SingleRecipe />}
             />
             <Route 
-              path="/search" 
+              path="search" 
               element={<FilteredRecipes />}
             />
             <Route 

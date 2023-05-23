@@ -13,7 +13,7 @@ export default function FilteredRecipes() {
   const queryFilter = searchParams.get("q")
   console.log(queryFilter)
 
-  console.log(searchParams)
+  console.log(categoryFilter)
 
   const getMealsByCategory = (cat) => {
     axios
@@ -50,6 +50,7 @@ export default function FilteredRecipes() {
         key={recipe.idMeal} 
         style={{ "textDecoration": "none" }} 
         to={`/recipes/${recipe.idMeal}`}
+        state={{search: searchParams.toString()}}
       >
         <Card style={{ "width": "18rem" }}>
           <Card.Img 

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { RecipesContext } from "../context/recipesContext"
 import "../css/styles.css"
 import Button from "react-bootstrap/Button"
@@ -7,7 +7,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup"
 import axios from "axios"
 
 function Home() {
-  const { search, setSearch, searchData, setSearchData} = useContext(RecipesContext)
+  const { search, setSearch, searchData, setSearchData } = useContext(RecipesContext)
 
   const [categories, setCategories] = useState([])
   
@@ -59,12 +59,6 @@ function Home() {
           }}
         >Search
         </Button>{' '}
-        <hr/>
-        <Link 
-          to="/recipes" 
-          className={`all-recipes-button`}
-        >See all recipes
-        </Link>
       </form>
     </div>
   )
