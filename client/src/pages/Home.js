@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
+import MapRecipePreviews from "../components/MapRecipePreviews"
 import axios from "axios"
 
 function Home() {
@@ -45,36 +46,11 @@ function Home() {
     </Button>
   ))
 
-  const mapLatestMeals = latestMeals.length > 0 ?
-  latestMeals.map(recipe => (
-    <Link 
-      key={recipe.idMeal} 
-      style={{ "textDecoration": "none" }} 
-      to={`/recipes/${recipe.idMeal}`}
-    >
-      <Card style={{ "width": "18rem" }}>
-        <Card.Img 
-          variant="top"
-          alt={recipe.idMeal} 
-          src={recipe.strMealThumb}
-          style={{ "width": "7rem" }}
-        ></Card.Img>
-        <Card.Body>
-          <Card.Title>{recipe.strMeal}</Card.Title>
-        </Card.Body>
-      </Card>
-    </Link>
-  ))
-  :
-  <h3 className={`theme-text text-center`}>
-    Sorry, looks like we have no recipes matching that food pairing.
-  </h3>
-
   const navigate = useNavigate()
 
   return (
     <div className="split">
-      <h2 className={`theme-text text-center`}>Welcome</h2>
+      <h1 className={`theme-text text-center`}>Welcome</h1>
       <h3>Search for recipe by category:</h3>
       <ButtonGroup>{mapCategories}</ButtonGroup>
       <h3 className={`theme-text text-center`}>Search for a recipe:</h3>
@@ -99,8 +75,15 @@ function Home() {
         >Search
         </Button>{' '}
       </form>
-      <h1>Check out our latest recipes:</h1>
-      <CardGroup>{mapLatestMeals}</CardGroup>
+      {latestMeals.length < 1 ?
+        <h2>Sorry, we're having trouble retrieving our latest recipes! Please select a category or type into the search bar to browse.
+        </h2>
+        : 
+        <>
+          <h2>Check out our latest recipes:</h2>
+          <MapRecipePreviews recipes={latestMeals} />
+        </>
+      }
     </div>
   )
 }
