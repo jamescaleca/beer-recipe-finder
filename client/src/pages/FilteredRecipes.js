@@ -72,7 +72,7 @@ export default function FilteredRecipes() {
 
   return (
     <div className={`-bg-primary container`}>
-      <h1 style={{margin: 0, padding: 20 }} className={`text-center`}>Search Results</h1>
+      <h1 style={{ margin: 0, padding: 20 }} className={`text-center`}>Search Results</h1>
       <CardGroup>{searchResults}</CardGroup>
     </div>
   )

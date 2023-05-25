@@ -1,15 +1,18 @@
 import React, { useContext, useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { RecipesContext } from "../context/recipesContext"
 import "../css/styles.css"
 import Button from "react-bootstrap/Button"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
+import Card from 'react-bootstrap/Card'
+import CardGroup from 'react-bootstrap/CardGroup'
 import axios from "axios"
 
 function Home() {
   const { search, setSearch, searchData, setSearchData } = useContext(RecipesContext)
 
   const [categories, setCategories] = useState([])
+  const [latestMeals, setLatestMeals] = useState([])
   
   const getCategories = () => {
     axios
@@ -21,8 +24,19 @@ function Home() {
       .catch(err => console.log(err))
   }
 
+  const getLatest = () => {
+    axios
+      .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/latest.php`)
+      .then(res => {
+        const strLatestMeals = res.data.meals.map(meal => meal)
+        setLatestMeals(strLatestMeals)
+      })
+      .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     getCategories()
+    getLatest()
   }, [])
 
   const mapCategories = categories.map(cat => (
@@ -30,6 +44,31 @@ function Home() {
       {cat}
     </Button>
   ))
+
+  const mapLatestMeals = latestMeals.length > 0 ?
+  latestMeals.map(recipe => (
+    <Link 
+      key={recipe.idMeal} 
+      style={{ "textDecoration": "none" }} 
+      to={`/recipes/${recipe.idMeal}`}
+    >
+      <Card style={{ "width": "18rem" }}>
+        <Card.Img 
+          variant="top"
+          alt={recipe.idMeal} 
+          src={recipe.strMealThumb}
+          style={{ "width": "7rem" }}
+        ></Card.Img>
+        <Card.Body>
+          <Card.Title>{recipe.strMeal}</Card.Title>
+        </Card.Body>
+      </Card>
+    </Link>
+  ))
+  :
+  <h3 className={`theme-text text-center`}>
+    Sorry, looks like we have no recipes matching that food pairing.
+  </h3>
 
   const navigate = useNavigate()
 
@@ -60,6 +99,8 @@ function Home() {
         >Search
         </Button>{' '}
       </form>
+      <h1>Check out our latest recipes:</h1>
+      <CardGroup>{mapLatestMeals}</CardGroup>
     </div>
   )
 }
