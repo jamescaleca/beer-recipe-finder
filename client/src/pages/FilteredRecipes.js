@@ -51,7 +51,7 @@ export default function FilteredRecipes() {
       {recipes.length < 1 ?
         <h2>Sorry, we're having trouble retrieving your request. Please try again or check back later!
         </h2>
-        : <MapRecipePreviews recipes={recipes} />
+        : <MapRecipePreviews recipes={recipes} search={searchParams}/>
       }
     </div>
   )

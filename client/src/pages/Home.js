@@ -81,7 +81,7 @@ function Home() {
         : 
         <>
           <h2>Check out our latest recipes:</h2>
-          <MapRecipePreviews recipes={latestMeals} />
+          <MapRecipePreviews recipes={latestMeals} search=""/>
         </>
       }
     </div>

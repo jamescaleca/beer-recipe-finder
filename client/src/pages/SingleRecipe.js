@@ -10,8 +10,6 @@ export default function SingleRecipe() {
 
   const location = useLocation()
 
-  console.log(location)
-
   useEffect(() => {
     const getThisRecipe = () => {
       axios 
@@ -26,6 +24,23 @@ export default function SingleRecipe() {
 
   const search = location.state?.search || ""
 
+  // const allIngredients = Object.keys(thisRecipe)
+  //   .filter(key => {
+  //     return key.indexOf("strIngredient") == 0
+  //   })
+  //   .reduce((newData, key) => {
+  //     newData[key] = thisRecipe[key]
+  //     return newData
+  //   }, {})
+
+  // const ingredientsNoEmptyValues = Object.values(allIngredients).filter(value => {
+  //   return value !== ""
+  // })
+
+  // console.log(ingredientsNoEmptyValues)
+
+
+
   return (
     thisRecipe ? 
       <div >
@@ -37,16 +52,42 @@ export default function SingleRecipe() {
         <h4>Instructions:</h4>
         <p>{thisRecipe.strInstructions}</p>
 
-        <h4>Ingredients:</h4>
+        {/* <h4>Ingredients:</h4> */}
 
-        <a href={thisRecipe.strSource} target="_blank" rel="noopener noreferrer">Source</a>
-        <Link
-          to={`..?${search}`}
-          relative="path"
-          className="back-button"
-        >
-          Back to results
-        </Link>
+        {thisRecipe.strYoutube ? 
+          <Button 
+            style={{ "backgroundColor": "#D50000", "borderColor": "#E0E0E0" }} 
+            href={thisRecipe.strYoutube}
+            target="_blank"
+            rel="noopener noreferrer"
+          >YouTube
+          </Button>
+          : null
+        }
+
+        <Button 
+          href={thisRecipe.strSource} 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >Source
+        </Button>
+        {search ? 
+          <Link
+            to={`..?${search}`}
+            relative="path"
+            className="back-button"
+          >
+            Back to results
+          </Link>
+          : 
+          <Link
+            to={`../..`}
+            relative="path"
+            className="back-button"
+          >
+            Back to Home
+          </Link> 
+        }
       </div>
     : null
   )
