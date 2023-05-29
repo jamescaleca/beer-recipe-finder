@@ -14,6 +14,7 @@ function Home() {
 
   const [categories, setCategories] = useState([])
   const [latestMeals, setLatestMeals] = useState([])
+  const [ loading, setLoading ] = useState(false)
   
   const getCategories = () => {
     axios
@@ -26,11 +27,13 @@ function Home() {
   }
 
   const getLatest = () => {
+    setLoading(true)
     axios
       .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/latest.php`)
       .then(res => {
         const strLatestMeals = res.data.meals.map(meal => meal)
         setLatestMeals(strLatestMeals)
+        setLoading(false)
       })
       .catch(err => console.log(err))
   }
@@ -52,7 +55,13 @@ function Home() {
     <div className="split">
       <h1 className={`theme-text text-center`}>Welcome</h1>
       <h3>Search for recipe by category:</h3>
-      <ButtonGroup>{mapCategories}</ButtonGroup>
+      {loading === true ? 
+        <div className="loader-container">
+          <span className="loader"></span>
+        </div>
+        :
+        <ButtonGroup>{mapCategories}</ButtonGroup>
+      }
       <h3 className={`theme-text text-center`}>Search for a recipe:</h3>
       <form className={`form-search-bar text-center`}>
         <input 
@@ -75,9 +84,10 @@ function Home() {
         >Search
         </Button>{' '}
       </form>
-      {latestMeals.length < 1 ?
-        <h2>Sorry, we're having trouble retrieving our latest recipes! Please select a category or type into the search bar to browse.
-        </h2>
+      {loading === true ?
+        <div className="loader-container">
+          <span className="loader"></span>
+        </div>
         : 
         <>
           <h2>Check out our latest recipes:</h2>
