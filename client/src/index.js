@@ -1,14 +1,56 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { RecipesContextProvider } from './context/recipesContext'
-import App from './App'
-
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements
+} from "react-router-dom"
+import Layout from "./components/Layout"
+import NotFound from "./pages/NotFound"
+import Home from "./pages/Home"
+import About from "./pages/About"
+import FilteredRecipes from "./pages/FilteredRecipes"
+import SingleRecipe from "./pages/SingleRecipe"
+import "./css/styles.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RecipesContextProvider>
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Home />} />
+    <Route 
+      path="about"
+      element={<About />}
+    />
+    <Route 
+      path="recipes"
+      element={<FilteredRecipes />}
+    />
+    <Route 
+      path="recipes/:recipeId" 
+      element={<SingleRecipe />}
+    />
+    <Route 
+      path="search" 
+      element={<FilteredRecipes />}
+    />
+    <Route 
+      path="*"
+      element={<NotFound />}
+    />
+  </Route>
+))
+
+function App() {
+  return (
+    <RouterProvider router={router} />
+  )
+}
+
+ReactDOM
+  .createRoot(document.getElementById('root'))
+  .render(
+    <React.StrictMode>
       <App />
-    </RecipesContextProvider>
-  </React.StrictMode>
+    </React.StrictMode>
 )

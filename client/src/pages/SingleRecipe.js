@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams, useLocation, Link } from "react-router-dom"
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
@@ -7,15 +7,18 @@ import axios from "axios"
 export default function SingleRecipe() {
   const {recipeId} = useParams()
   const [thisRecipe, setThisRecipe] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const location = useLocation()
 
   useEffect(() => {
     const getThisRecipe = () => {
+      setLoading(true)
       axios 
         .get(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/lookup.php?i=${recipeId}`)
         .then(res => {
           setThisRecipe(res.data.meals[0])
+          setLoading(false)
         })
         .catch(error => console.log(error))
     }
@@ -42,7 +45,11 @@ export default function SingleRecipe() {
 
 
   return (
-    thisRecipe ? 
+    loading ? 
+      <div className="loader-container">
+        <span className="loader"></span>
+      </div>
+      :
       <div >
         <h1 >{thisRecipe.strMeal}</h1>
         <Image style={{ "width": "24rem" }} src={thisRecipe.strMealThumb}></Image>
@@ -89,6 +96,5 @@ export default function SingleRecipe() {
           </Link> 
         }
       </div>
-    : null
   )
 }

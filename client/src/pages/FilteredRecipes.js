@@ -4,15 +4,17 @@ import MapRecipePreviews from "../components/MapRecipePreviews"
 import axios from "axios"
 
 export default function FilteredRecipes() {
-  const [ recipes, setRecipes ] = useState([])
-  const [ loading, setLoading ] = useState(false)
-  const [ searchParams ] = useSearchParams()
+  const [recipes, setRecipes] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [searchParams] = useSearchParams()
 
   const categoryFilter = searchParams.get("category")
   const queryFilter = searchParams.get("q")
   console.log(queryFilter)
 
   console.log(categoryFilter)
+  console.log(loading)
 
   const getMealsByCategory = (cat) => {
     setLoading(true)
@@ -23,7 +25,7 @@ export default function FilteredRecipes() {
         setRecipes(results)
         setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => setError(err))
   }
 
   const getMealsBySearchQuery = (search) => {
@@ -35,11 +37,12 @@ export default function FilteredRecipes() {
         setRecipes(results)
         setLoading(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => setError(err))
   }
 
   useEffect(() => {
     if(categoryFilter) {
+      setLoading(true)
       getMealsByCategory(categoryFilter)
     }
     if(queryFilter) {
@@ -47,15 +50,22 @@ export default function FilteredRecipes() {
     }
   }, [categoryFilter, queryFilter])
 
+  if(error) {
+    return <h1 style={{ color: "red" }}>There was an error: {error.message}</h1>
+  }
+
   return (
-    loading === true ?
-      <div className="loader-container">
-        <span className="loader"></span>
-      </div>
-    :
-      <div className={`-bg-primary container`}>
-        <h1 style={{ margin: 0, padding: 20 }} className={`text-center`}>Search Results</h1>
-        <MapRecipePreviews recipes={recipes} search={searchParams}/>
-      </div>
+    <>
+      <h1 style={{ margin: 0, padding: 20 }} className={`text-center`}>Search Results</h1>
+      {loading ?
+        <div className="loader-container">
+          <span className="loader"></span>
+        </div>
+      :
+        <div className={`-bg-primary container`}>
+          <MapRecipePreviews recipes={recipes} search={searchParams}/>
+        </div>
+      }
+    </>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom"
-import { RecipesContext } from "../context/recipesContext"
 import "../css/styles.css"
 import Button from "react-bootstrap/Button"
 import ButtonGroup from "react-bootstrap/ButtonGroup"
@@ -10,11 +9,12 @@ import MapRecipePreviews from "../components/MapRecipePreviews"
 import axios from "axios"
 
 function Home() {
-  const { search, setSearch, searchData, setSearchData } = useContext(RecipesContext)
-
   const [categories, setCategories] = useState([])
   const [latestMeals, setLatestMeals] = useState([])
-  const [ loading, setLoading ] = useState(false)
+  const [search, setSearch] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
   
   const getCategories = () => {
     axios
@@ -84,13 +84,13 @@ function Home() {
         >Search
         </Button>{' '}
       </form>
-      {loading === true ?
+      {loading ?
         <div className="loader-container">
           <span className="loader"></span>
         </div>
         : 
         <>
-          <h2>Check out our latest recipes:</h2>
+          <h3>Check out our latest recipes:</h3>
           <MapRecipePreviews recipes={latestMeals} search=""/>
         </>
       }
