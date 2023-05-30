@@ -7,8 +7,9 @@ import {
   createRoutesFromElements
 } from "react-router-dom"
 import Layout from "./components/Layout"
+import Error from "./components/Error"
 import NotFound from "./pages/NotFound"
-import Home from "./pages/Home"
+import Home, { loader as homeLoader } from "./pages/Home"
 import About from "./pages/About"
 import FilteredRecipes from "./pages/FilteredRecipes"
 import SingleRecipe from "./pages/SingleRecipe"
@@ -17,7 +18,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
-    <Route index element={<Home />} />
+    <Route 
+      index 
+      element={<Home />} 
+      errorElement={<Error />}
+      loader={homeLoader} 
+    />
     <Route 
       path="about"
       element={<About />}

@@ -3,6 +3,10 @@ import { useSearchParams } from "react-router-dom"
 import MapRecipePreviews from "../components/MapRecipePreviews"
 import axios from "axios"
 
+export async function loader() {
+
+}
+
 export default function FilteredRecipes() {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
