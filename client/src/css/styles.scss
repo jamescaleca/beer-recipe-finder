@@ -5,6 +5,20 @@
   filter: invert(12%) sepia(80%) saturate(7045%) hue-rotate(9deg) brightness(91%) contrast(114%);
 }
 
+.split {
+  .btn-group-cont {
+    display: flex;
+    justify-content: center;
+  }
+  form {
+    display: flex;
+    justify-content: center;
+    input {
+      margin-right: .5rem;
+    }
+  }
+}
+
 .loader-container {
   display: flex;
   align-items: center;
@@ -30,6 +44,20 @@
       border-radius: 50%;
       border: 3px solid transparent;
       border-bottom-color: #3f2dff;
+    }
+  }
+}
+
+.card-group {
+  display: flex;
+  justify-content: space-between;
+  
+  .card {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    img {
+      margin-top: .5rem;
     }
   }
 }

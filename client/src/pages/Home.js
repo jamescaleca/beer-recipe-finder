@@ -47,13 +47,9 @@ function Home() {
 
   return (
     <div className="split">
-      <h1 className={`theme-text text-center`}>Welcome</h1>
-      <h3>Search for recipe by category:</h3>
-
-      <ButtonGroup>{mapCategories}</ButtonGroup>
-      
-      <h3 className={`theme-text text-center`}>Search for a recipe:</h3>
-      <form className={`form-search-bar text-center`}>
+      <h1 className={`text-center`}>Welcome to Recipe Finder!</h1>
+      <h3 className={`text-center`}>Search for a recipe by name</h3>
+      <form className={`text-center`}>
         <input 
           className={`search-input`}
           type="text" 
@@ -73,8 +69,14 @@ function Home() {
         >Search
         </Button>{' '}
       </form>
+      <h3 className={`text-center`}>Or filter recipes by category</h3>
 
-      <h3>Check out our latest recipes:</h3>
+      <div className="btn-group-cont">
+        <ButtonGroup>{mapCategories}</ButtonGroup>
+      </div>
+      
+
+      <h3 className="text-center">And here are our latest recipes</h3>
       <MapRecipePreviews recipes={latestMeals} search=""/>
     </div>
   )

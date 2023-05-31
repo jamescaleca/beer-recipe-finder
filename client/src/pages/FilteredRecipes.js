@@ -60,7 +60,9 @@ export default function FilteredRecipes() {
 
   return (
     <>
-      <h1 style={{ margin: 0, padding: 20 }} className={`text-center`}>Search Results</h1>
+      <h1 style={{ margin: 0, padding: 20 }} className={`text-center`}>
+        Search Results: {queryFilter ? `${queryFilter}` : `${categoryFilter}`} 
+      </h1>
       {loading ?
         <div className="loader-container">
           <span className="loader"></span>

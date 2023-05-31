@@ -3,6 +3,18 @@
   filter: invert(12%) sepia(80%) saturate(7045%) hue-rotate(9deg) brightness(91%) contrast(114%);
 }
 
+.split .btn-group-cont {
+  display: flex;
+  justify-content: center;
+}
+.split form {
+  display: flex;
+  justify-content: center;
+}
+.split form input {
+  margin-right: 0.5rem;
+}
+
 .loader-container {
   display: flex;
   align-items: center;
@@ -30,6 +42,19 @@
   border-radius: 50%;
   border: 3px solid transparent;
   border-bottom-color: #3f2dff;
+}
+
+.card-group {
+  display: flex;
+  justify-content: space-between;
+}
+.card-group .card {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+.card-group .card img {
+  margin-top: 0.5rem;
 }
 
 @keyframes rotation {

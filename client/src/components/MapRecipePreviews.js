@@ -13,7 +13,7 @@ export default function MapRecipePreviews(props) {
       to={`/recipes/${recipe.idMeal}`}
       state={{search: search.toString()}}
     >
-      <Card style={{ "width": "18rem" }}>
+      <Card style={{ "width": "18rem", "height": "14rem" }}>
         <Card.Img 
           variant="top"
           alt={recipe.idMeal} 
