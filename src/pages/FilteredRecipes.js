@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
+import Spinner from "react-bootstrap/Spinner"
 import MapRecipePreviews from "../components/MapRecipePreviews"
 import axios from "axios"
 
@@ -65,7 +66,13 @@ export default function FilteredRecipes() {
       </h1>
       {loading ?
         <div className="loader-container">
-          <span className="loader"></span>
+          <Spinner  
+            animation="border" 
+            variant="primary" 
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         </div>
       :
         <div className={`-bg-primary container`}>

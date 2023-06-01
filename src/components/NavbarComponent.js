@@ -5,19 +5,21 @@ import FoodIcon from "../assets/food.svg"
 import Container from "react-bootstrap/Container"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavbarBrand from "react-bootstrap/NavbarBrand";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavbarComponent() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="primary" expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand href="/">
+        <NavbarBrand href="/">
           <img 
+            id="food-icon"
             alt="FoodIcon" 
             src={FoodIcon} 
             style={{"width": "2rem"}}
           ></img>
-        </Navbar.Brand>
+        </NavbarBrand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

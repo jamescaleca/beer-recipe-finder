@@ -1,4 +1,12 @@
-// @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
+
+#root {
+  background-color: #e3e3e3;
+}
+
+#food-icon {
+  filter: invert(100%) sepia(0%) saturate(3535%) hue-rotate(301deg) brightness(118%) contrast(87%);
+}
 
 #heart {
   width: 1rem;
@@ -9,6 +17,7 @@
   .btn-group-cont {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
   form {
     display: flex;
@@ -50,16 +59,38 @@
 
 .card-group {
   display: flex;
-  justify-content: space-between;
-  
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
   .card {
     margin-bottom: 1rem;
+    margin-right: .5rem;
     display: flex;
     align-items: center;
     img {
       margin-top: .5rem;
     }
   }
+}
+
+.single-recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .instructions-cont {
+    margin: 0 1rem;
+  }
+  .buttons-cont {
+    display: flex;
+    flex-direction: row;
+    
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: .5rem;
 }
 
 @keyframes rotation {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useLocation, Link } from "react-router-dom"
-import Image from 'react-bootstrap/Image'
-import Button from 'react-bootstrap/Button'
+import { Image, Spinner, Button } from 'react-bootstrap'
 import axios from "axios"
 
 export default function SingleRecipe() {
@@ -47,37 +46,45 @@ export default function SingleRecipe() {
   return (
     loading ? 
       <div className="loader-container">
-        <span className="loader"></span>
+        <Spinner  
+          animation="border" 
+          variant="primary" 
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
       </div>
       :
-      <div >
+      <div className="single-recipe">
         <h1 >{thisRecipe.strMeal}</h1>
         <Image style={{ "width": "24rem" }} src={thisRecipe.strMealThumb}></Image>
         
-        <h2>Recipe</h2>
-        
         <h4>Instructions:</h4>
-        <p>{thisRecipe.strInstructions}</p>
+        <div className="instructions-cont">
+          <p>{thisRecipe.strInstructions}</p>
+        </div>
 
         {/* <h4>Ingredients:</h4> */}
 
-        {thisRecipe.strYoutube ? 
-          <Button 
-            style={{ "backgroundColor": "#D50000", "borderColor": "#E0E0E0" }} 
-            href={thisRecipe.strYoutube}
-            target="_blank"
-            rel="noopener noreferrer"
-          >YouTube
-          </Button>
-          : null
-        }
+        <div className="buttons-cont">
+          {thisRecipe.strYoutube ? 
+            <Button 
+              style={{ "backgroundColor": "#D50000", "borderColor": "#E0E0E0" }} 
+              href={thisRecipe.strYoutube}
+              target="_blank"
+              rel="noopener noreferrer"
+            >YouTube
+            </Button>
+            : null
+          }
 
-        <Button 
-          href={thisRecipe.strSource} 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >Source
-        </Button>
+          <Button 
+            href={thisRecipe.strSource} 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >Source
+          </Button>
+        </div>
         {search ? 
           <Link
             to={`..?${search}`}

@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate, useLoaderData, defer } from "react-router-dom"
 import "../css/styles.css"
-import Button from "react-bootstrap/Button"
-import ButtonGroup from "react-bootstrap/ButtonGroup"
+import { Button, Form, Row, Col } from "react-bootstrap"
 import MapRecipePreviews from "../components/MapRecipePreviews"
 
 async function getCategories() {
@@ -32,6 +31,8 @@ export async function loader() {
   return defer({categories: categoryPromise, latestMeals: latestPromise})
 }
 
+
+
 function Home() {
   const [search, setSearch] = useState("")
 
@@ -49,30 +50,41 @@ function Home() {
     <div className="split">
       <h1 className={`text-center`}>Welcome to Recipe Finder!</h1>
       <h3 className={`text-center`}>Search for a recipe by name</h3>
-      <form className={`text-center`}>
-        <input 
-          className={`search-input`}
-          type="text" 
-          placeholder="Beef Wellington"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        ></input>
-        <br/>
-        <Button 
-          variant="primary"
-          type="submit" 
-          value="Search" 
-          onClick={(e) => {
-            e.preventDefault()
-            navigate(`/search?q=${search}`)
-          }}
-        >Search
-        </Button>{' '}
-      </form>
+      <Form>
+        <Form.Group as={Row} className="my-2">
+          {/* <input 
+            className={`search-input`}
+            type="text" 
+            placeholder="Beef Wellington"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          ></input> */}
+          <Col sm={8}>
+            <Form.Control 
+              type="text" 
+              placeholder="Beef Wellington"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Col>
+          <Col sm={2}>
+            <Button 
+              variant="primary"
+              type="submit" 
+              value="Search" 
+              onClick={(e) => {
+                e.preventDefault()
+                navigate(`/search?q=${search}`)
+              }}
+            >Search
+            </Button>{' '}
+          </Col>
+        </Form.Group>
+      </Form>
       <h3 className={`text-center`}>Or filter recipes by category</h3>
 
       <div className="btn-group-cont">
-        <ButtonGroup>{mapCategories}</ButtonGroup>
+        {mapCategories}
       </div>
       
 
