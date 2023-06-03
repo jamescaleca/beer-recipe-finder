@@ -4,10 +4,6 @@ import Spinner from "react-bootstrap/Spinner"
 import MapRecipePreviews from "../components/MapRecipePreviews"
 import axios from "axios"
 
-export async function loader() {
-
-}
-
 export default function FilteredRecipes() {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
@@ -16,10 +12,8 @@ export default function FilteredRecipes() {
 
   const categoryFilter = searchParams.get("category")
   const queryFilter = searchParams.get("q")
-  console.log(queryFilter)
 
-  console.log(categoryFilter)
-  console.log(loading)
+  console.log(queryFilter)
 
   const getMealsByCategory = (cat) => {
     setLoading(true)
@@ -76,7 +70,7 @@ export default function FilteredRecipes() {
         </div>
       :
         <div className={`-bg-primary container`}>
-          <MapRecipePreviews recipes={recipes} search={searchParams}/>
+          <MapRecipePreviews recipes={recipes} search={searchParams} query={queryFilter} category={categoryFilter}/>
         </div>
       }
     </>

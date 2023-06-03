@@ -41,8 +41,6 @@ export default function SingleRecipe() {
 
   // console.log(ingredientsNoEmptyValues)
 
-
-
   return (
     loading ? 
       <div className="loader-container">

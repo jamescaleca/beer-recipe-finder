@@ -10,7 +10,6 @@ import Layout from "./components/Layout"
 import Error from "./components/Error"
 import NotFound from "./pages/NotFound"
 import Home, { loader as homeLoader } from "./pages/Home"
-import About from "./pages/About"
 import FilteredRecipes from "./pages/FilteredRecipes"
 import SingleRecipe from "./pages/SingleRecipe"
 import "./css/styles.css"
@@ -23,10 +22,6 @@ const router = createBrowserRouter(createRoutesFromElements(
       element={<Home />} 
       errorElement={<Error />}
       loader={homeLoader} 
-    />
-    <Route 
-      path="about"
-      element={<About />}
     />
     <Route 
       path="recipes"

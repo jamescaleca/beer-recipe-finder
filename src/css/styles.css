@@ -12041,6 +12041,8 @@ textarea.form-control-lg {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 1rem 0;
+  padding: 0 5rem;
 }
 .split form {
   display: flex;
@@ -12077,6 +12079,12 @@ textarea.form-control-lg {
   border-radius: 50%;
   border: 3px solid transparent;
   border-bottom-color: #3f2dff;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .card-group {
@@ -12120,5 +12128,10 @@ textarea.form-control-lg {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@media screen and (min-width: 768px) {
+  .search-form {
+    flex-direction: row;
   }
 }/*# sourceMappingURL=styles.css.map */

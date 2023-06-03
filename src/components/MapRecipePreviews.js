@@ -4,20 +4,20 @@ import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
 
 export default function MapRecipePreviews(props) {
-  const { recipes, search } = props
+  const { recipes, search, category, query } = props
 
   const mapRecipes = recipes.map(recipe => (
     <Link 
       key={recipe.idMeal} 
       style={{ "textDecoration": "none" }} 
       to={`/recipes/${recipe.idMeal}`}
-      state={{search: search.toString()}}
+      state={{search: search.toString(), category: category, query: query}}
     >
       <Card style={{ "width": "18rem", "height": "14rem" }}>
         <Card.Img 
           variant="top"
           alt={recipe.idMeal} 
-          src={`${recipe.strMealThumb}/preview`}
+          src={`${recipe.strMealThumb}`}
           style={{ "width": "7rem" }}
         ></Card.Img>
         <Card.Body>
