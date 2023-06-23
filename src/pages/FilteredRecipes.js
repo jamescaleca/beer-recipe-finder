@@ -50,7 +50,14 @@ export default function FilteredRecipes() {
   }, [categoryFilter, queryFilter])
 
   if(error) {
-    return <h1 style={{ color: "red" }}>There was an error: {error.message}</h1>
+    return (
+      <>
+        <h1 style={{ color: "red" }}>There was an error: {error.message}</h1>
+        <h2 style={{ color: "red" }}>
+          Please try a different search query or check back later.
+        </h2>
+      </>
+    )
   }
 
   return (

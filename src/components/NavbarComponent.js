@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import FoodIcon from "../assets/food.svg"
 import { 
@@ -11,9 +11,10 @@ import {
 } from "react-bootstrap"
 import axios from "axios"
 
-function NavbarComponent() {
-  const [search, setSearch] = useState("")
+export default function NavbarComponent() {
   const [categories, setCategories] = useState([])
+
+  const searchRef = useRef()
 
   const navigate = useNavigate()
 
@@ -65,8 +66,7 @@ function NavbarComponent() {
               <Form.Control 
                 type="text" 
                 placeholder="Search Recipes"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                ref={searchRef}
               />
               <Button 
                 style={{ border: "1px solid white"}}
@@ -75,7 +75,7 @@ function NavbarComponent() {
                 value="Search" 
                 onClick={(e) => {
                   e.preventDefault()
-                  navigate(`/search?q=${search}`)
+                  navigate(`/search?q=${searchRef.current.value}`)
                 }}
               >Search
               </Button>{' '}
@@ -86,5 +86,3 @@ function NavbarComponent() {
     </Navbar>
   )
 }
-
-export default NavbarComponent

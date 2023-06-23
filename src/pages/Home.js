@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef } from "react"
 import { useNavigate, useLoaderData, defer } from "react-router-dom"
 import "../css/styles.css"
 import { Button, Form } from "react-bootstrap"
@@ -13,7 +13,6 @@ async function getCategories() {
   const dataMap = data.meals.map(cat => cat.strCategory)
   return dataMap
 }
-  
 
 async function getLatest() {
   const res = await fetch(`https://www.themealdb.com/api/json/v2/${process.env.REACT_APP_API_KEY}/latest.php`)
@@ -31,12 +30,10 @@ export async function loader() {
   return defer({categories: categoryPromise, latestMeals: latestPromise})
 }
 
-
-
 function Home() {
-  const [search, setSearch] = useState("")
-
   const { categories, latestMeals } = useLoaderData()
+
+  const searchRef = useRef()
 
   const mapCategories = categories.map(cat => (
     <Button href={`/recipes?category=${cat}`} key={cat} variant="primary">
@@ -55,8 +52,7 @@ function Home() {
           <Form.Control 
             type="text" 
             placeholder="Beef Wellington"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            ref={searchRef}
           />
           <Button 
             variant="primary"
@@ -64,7 +60,7 @@ function Home() {
             value="Search" 
             onClick={(e) => {
               e.preventDefault()
-              navigate(`/search?q=${search}`)
+              navigate(`/search?q=${searchRef.current.value}`)
             }}
           >Search
           </Button>{' '}
